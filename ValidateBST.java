@@ -50,29 +50,31 @@ public boolean isValidBST(TreeNode root) {
 
 class Solution {
     boolean isValid;
+    TreeNode prev;
     public boolean isValidBST(TreeNode root) {
-        if(root==null) return true;
-        // boolean isValid;
         
+        if(root==null){
+            return false;
+        }
+        //So for doing the recursive call need to create one func() which if doesnot return is fine;
         isValid=true;
-        inorder(root);
+        inorder(root);  
         return isValid;
     }
     
-    public void inorder(TreeNode root){
-        TreeNode prev=null;
-        
+    private void inorder(TreeNode root){
         if(root==null){
             return;
         }
-        inorder(root.left);
-        System.out.println(root.val);
+        inorder(root.left);         //in case of leaf node both these left/right will return;
+             //else control moves to lleft side of the tree, value then right side of the tree;
+        // System.out.println(root.val);
+        
         if(prev!=null && prev.val>=root.val){
             isValid=false;
             return;
         }
-        prev=root;    
+        prev=root;
         inorder(root.right);
     }
-    
 }
